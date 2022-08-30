@@ -10,12 +10,13 @@
     </parent>
     <groupId>com.vrvideo</groupId>
     <artifactId>vr-video-service-provider</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <name>vr-video-service-provider</name>
     <description>vr-video-service-provider</description>
     <properties>
         <java.version>17</java.version>
     </properties>
+    <packaging>jar</packaging>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
