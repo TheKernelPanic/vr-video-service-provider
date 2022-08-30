@@ -33,3 +33,6 @@ build/
 
 ### Docker ###
 /.mysql-data
+
+/**/segments_1
+/**/write.lock
