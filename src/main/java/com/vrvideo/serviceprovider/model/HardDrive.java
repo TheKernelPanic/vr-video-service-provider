@@ -9,13 +9,19 @@ import org.hibernate.search.annotations.Indexed;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
 @Indexed
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "hard_drive")
+@Table(
+        name = "hard_drive",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = "code")
+        }
+)
 public class HardDrive {
 
     @Id

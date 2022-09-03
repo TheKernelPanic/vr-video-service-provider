@@ -15,7 +15,13 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "vr_video")
+@Table(
+        name = "vr_video",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = "uuid"),
+                @UniqueConstraint(columnNames = "originalFilename")
+        }
+)
 public class VrVideo {
 
     @Id

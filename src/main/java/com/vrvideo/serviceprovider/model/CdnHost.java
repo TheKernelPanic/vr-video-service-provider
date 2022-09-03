@@ -9,13 +9,20 @@ import org.hibernate.search.annotations.Indexed;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
 @Indexed
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "cdn_host")
+@Table(
+        name = "cdn_host",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = "address"),
+                @UniqueConstraint(columnNames = "description")
+        }
+)
 public class CdnHost {
 
     @Id
