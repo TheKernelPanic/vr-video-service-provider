@@ -1,5 +1,6 @@
 package com.vrvideo.serviceprovider.service.actress;
 
+import com.vrvideo.serviceprovider.exception.DomainValidationException;
 import com.vrvideo.serviceprovider.model.Actress;
 import com.vrvideo.serviceprovider.repository.ActressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,11 @@ public class CreateService extends ActressService{
         this.repository = repository;
     }
 
-    public void create(Actress actress) {
+    public void create(Actress actress) throws DomainValidationException {
+
+        if (actress.getName().length() == 0)  {
+            throw new DomainValidationException("Invalid value for actress name");
+        }
         this.repository.save(actress);
     }
 }
