@@ -5,18 +5,23 @@ import com.vrvideo.serviceprovider.repository.ActressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Set;
-
 @Service
-public class FindAllService extends ActressService{
+public class FinderService extends ActressService{
 
     @Autowired
-    public FindAllService(ActressRepository repository) {
+    public FinderService(ActressRepository repository) {
         this.repository = repository;
     }
 
-    public Iterable<Actress> fetch() {
+    public Iterable<Actress> findAll() {
         return this.repository.findAll();
+    }
+
+    public Actress findOneBySlug(String slug) {
+
+        /**
+         * TODO: Validate slug
+         */
+        return this.repository.findBySlug(slug);
     }
 }

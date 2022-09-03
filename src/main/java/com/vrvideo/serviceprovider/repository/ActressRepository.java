@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ActressRepository extends CrudRepository<Actress, Long> {
+
+    public Actress findBySlug(String slug);
 }

@@ -4,16 +4,12 @@ import com.vrvideo.serviceprovider.dto.ActressDto;
 import com.vrvideo.serviceprovider.exception.DomainValidationException;
 import com.vrvideo.serviceprovider.model.Actress;
 import com.vrvideo.serviceprovider.service.actress.CreateService;
-import com.vrvideo.serviceprovider.service.actress.FindAllService;
+import com.vrvideo.serviceprovider.service.actress.FinderService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
@@ -23,19 +19,19 @@ import java.util.List;
 @RequestMapping(value = "/actress")
 public class ActressController extends BaseController{
 
-    private CreateService createService;
+    private final CreateService createService;
 
-    private FindAllService findAllService;
+    private final FinderService finderService;
 
     @Autowired
     public ActressController(
             ModelMapper modelMapper,
             CreateService createActressService,
-            FindAllService findAllService
+            FinderService findAllService
     ) {
         super(modelMapper);
         this.createService = createActressService;
-        this.findAllService = findAllService;
+        this.finderService = findAllService;
     }
 
     @ResponseStatus(HttpStatus.CREATED)
@@ -55,8 +51,20 @@ public class ActressController extends BaseController{
     public List<ActressDto> list() {
         List<ActressDto> actressDtoList = new ArrayList<>();
 
-        this.findAllService.fetch().forEach(actress -> actressDtoList.add(this.modelMapper.map(actress, ActressDto.class)));
+        this.finderService.findAll().forEach(actress -> actressDtoList.add(this.modelMapper.map(actress, ActressDto.class)));
 
         return actressDtoList;
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(value="/getBySlug/{slug}", method= RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ActressDto getBySlug(@PathVariable String slug) {
+
+        Actress actress = this.finderService.findOneBySlug(slug);
+
+        if (actress == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        return this.modelMapper.map(actress, ActressDto.class);
     }
 }
