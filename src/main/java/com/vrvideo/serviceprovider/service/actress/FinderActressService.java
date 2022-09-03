@@ -6,10 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class FinderService extends ActressService{
+public class FinderActressService extends ActressService{
 
     @Autowired
-    public FinderService(ActressRepository repository) {
+    public FinderActressService(ActressRepository repository) {
         this.repository = repository;
     }
 

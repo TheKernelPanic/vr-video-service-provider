@@ -4,7 +4,7 @@ import com.vrvideo.serviceprovider.dto.ActressDto;
 import com.vrvideo.serviceprovider.exception.DomainValidationException;
 import com.vrvideo.serviceprovider.model.Actress;
 import com.vrvideo.serviceprovider.service.actress.CreateService;
-import com.vrvideo.serviceprovider.service.actress.FinderService;
+import com.vrvideo.serviceprovider.service.actress.FinderActressService;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,13 +25,13 @@ public class ActressController extends BaseController{
 
     private final CreateService createService;
 
-    private final FinderService finderService;
+    private final FinderActressService finderService;
 
     @Autowired
     public ActressController(
             ModelMapper modelMapper,
             CreateService createActressService,
-            FinderService findAllService
+            FinderActressService findAllService
     ) {
         super(modelMapper);
         this.createService = createActressService;

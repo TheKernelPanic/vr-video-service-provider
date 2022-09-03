@@ -1,15 +1,38 @@
 package com.vrvideo.serviceprovider.controller;
 
+import com.vrvideo.serviceprovider.dto.VrVideoDto;
+import com.vrvideo.serviceprovider.service.vrVideo.FinderVrVideoService;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
-@RequestMapping(value = "/vrvideo")
-public class VrVideoController {
+@RequestMapping(value = "/vr-video")
+public class VrVideoController extends BaseController {
+
+    private final FinderVrVideoService finderService;
+
+    @Autowired
+    public VrVideoController(
+            ModelMapper modelMapper,
+            FinderVrVideoService finderService
+    ) {
+        super(modelMapper);
+        this.finderService = finderService;
+    }
 
     @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public void list(@RequestParam int page) {
+    @RequestMapping(value = "/list", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<VrVideoDto> list() {
+        List<VrVideoDto> vrVideoDtoList = new ArrayList<>();
 
+        this.finderService.findAll().forEach(vrVideo -> vrVideoDtoList.add(this.modelMapper.map(vrVideo, VrVideoDto.class)));
+
+        return vrVideoDtoList;
     }
 }
