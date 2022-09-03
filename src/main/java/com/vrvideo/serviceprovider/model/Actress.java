@@ -15,7 +15,13 @@ import java.util.Set;
 @Setter
 @Getter
 @NoArgsConstructor
-@Table(name = "actress")
+@Table(
+    name = "actress",
+    uniqueConstraints = {
+         @UniqueConstraint(columnNames = "uuid"),
+         @UniqueConstraint(columnNames = "slug")
+    }
+)
 public class Actress {
 
     @Id
