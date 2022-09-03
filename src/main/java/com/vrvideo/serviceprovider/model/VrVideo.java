@@ -35,7 +35,7 @@ public class VrVideo {
     private Boolean reported;
 
     @Field
-    private int fileSize;
+    private long fileSize;
 
     @Field
     private String uuid;
