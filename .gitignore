@@ -36,3 +36,5 @@ build/
 
 /**/segments_1
 /**/write.lock
+
+/logs/

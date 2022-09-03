@@ -6,6 +6,8 @@ import com.vrvideo.serviceprovider.model.Actress;
 import com.vrvideo.serviceprovider.service.actress.CreateService;
 import com.vrvideo.serviceprovider.service.actress.FinderService;
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -18,6 +20,8 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/actress")
 public class ActressController extends BaseController{
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ActressController.class);
 
     private final CreateService createService;
 
@@ -61,6 +65,8 @@ public class ActressController extends BaseController{
     public ActressDto getBySlug(@PathVariable String slug) {
 
         Actress actress = this.finderService.findOneBySlug(slug);
+
+        LOGGER.info("Get by slug: " + slug);
 
         if (actress == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
