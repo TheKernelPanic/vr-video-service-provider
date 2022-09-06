@@ -25,8 +25,8 @@ import java.util.Set;
 public class Actress {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     @Field
     private String name;
