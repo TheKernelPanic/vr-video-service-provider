@@ -15,23 +15,23 @@ import java.util.List;
 @RequestMapping(value = "/vr-video")
 public class VrVideoController extends BaseController {
 
-    private final FinderVrVideoService finderService;
+    private final FinderVrVideoService finderVrVideoService;
 
     @Autowired
     public VrVideoController(
             ModelMapper modelMapper,
-            FinderVrVideoService finderService
+            FinderVrVideoService finderVrVideoService
     ) {
         super(modelMapper);
-        this.finderService = finderService;
+        this.finderVrVideoService = finderVrVideoService;
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(value = "/list", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<VrVideoDto> list() {
+    @RequestMapping(value = "/listing", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<VrVideoDto> listing() {
         List<VrVideoDto> vrVideoDtoList = new ArrayList<>();
 
-        this.finderService.findAll().forEach(vrVideo -> vrVideoDtoList.add(this.modelMapper.map(vrVideo, VrVideoDto.class)));
+        this.finderVrVideoService.findAll().forEach(vrVideo -> vrVideoDtoList.add(this.modelMapper.map(vrVideo, VrVideoDto.class)));
 
         return vrVideoDtoList;
     }

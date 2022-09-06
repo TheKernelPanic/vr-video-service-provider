@@ -1,7 +1,8 @@
 package com.vrvideo.serviceprovider.controller;
 
 import com.vrvideo.serviceprovider.dto.ActressDto;
-import com.vrvideo.serviceprovider.exception.DomainValidationException;
+import com.vrvideo.serviceprovider.model.exception.DomainAlreadyExistsException;
+import com.vrvideo.serviceprovider.model.exception.DomainValidationException;
 import com.vrvideo.serviceprovider.model.Actress;
 import com.vrvideo.serviceprovider.service.actress.CreateService;
 import com.vrvideo.serviceprovider.service.actress.FinderActressService;
@@ -39,7 +40,7 @@ public class ActressController extends BaseController{
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @RequestMapping(value = "/create")
+    @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public void create(@RequestBody ActressDto actressDto) {
 
         Actress actress = this.modelMapper.map(actressDto, Actress.class);
@@ -47,12 +48,14 @@ public class ActressController extends BaseController{
             this.createService.create(actress);
         } catch (DomainValidationException exception) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        } catch (DomainAlreadyExistsException exception) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT);
         }
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(value = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<ActressDto> list() {
+    @RequestMapping(value = "/listing", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<ActressDto> listing() {
         List<ActressDto> actressDtoList = new ArrayList<>();
 
         this.finderService.findAll().forEach(actress -> actressDtoList.add(this.modelMapper.map(actress, ActressDto.class)));
@@ -65,8 +68,6 @@ public class ActressController extends BaseController{
     public ActressDto getBySlug(@PathVariable String slug) {
 
         Actress actress = this.finderService.findOneBySlug(slug);
-
-        LOGGER.info("Get by slug: " + slug);
 
         if (actress == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);

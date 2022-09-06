@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class FinderVrVideoService extends VrVideoService {
+public final class FinderVrVideoService extends VrVideoService {
 
     @Autowired
     public FinderVrVideoService(VrVideoRepository repository) {
