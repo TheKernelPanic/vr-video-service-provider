@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   database:
-    image: mysql:8.0
+    image: mysql:5.7.39
     container_name: vr_video_service_provider_database
     ports:
       - '3306:3306'
@@ -11,3 +11,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: ePy0byL05P3
       MYSQL_DATABASE: vr_video_service_provider_db
+
+networks:
+  vr_video_service_provider:
+    driver: bridge
