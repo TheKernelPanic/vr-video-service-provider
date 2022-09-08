@@ -71,7 +71,7 @@ public class VrVideo {
      * TODO: Cascade type
      */
     @ManyToOne(optional = true, fetch = FetchType.EAGER)
-    private HardDrive backupOnHardDrive;
+    private HardDrive backupOn;
 
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private CdnHost hostedOn;

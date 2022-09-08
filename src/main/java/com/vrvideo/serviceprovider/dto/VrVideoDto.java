@@ -35,4 +35,10 @@ public class VrVideoDto {
 
     @JsonProperty("actresses")
     private Set<ActressDto> actresses;
+
+    @JsonProperty("hosted_on")
+    private CdnHostDto hostedOn;
+
+    @JsonProperty("backup_on")
+    private HardDriveDto backupOn;
 }
