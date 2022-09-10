@@ -1,5 +1,6 @@
 package com.vrvideo.serviceprovider.service.actress;
 
+import com.vrvideo.serviceprovider.dto.ActressDto;
 import com.vrvideo.serviceprovider.model.exception.DomainAlreadyExistsException;
 import com.vrvideo.serviceprovider.model.exception.DomainValidationException;
 import com.vrvideo.serviceprovider.model.Actress;
@@ -7,6 +8,8 @@ import com.vrvideo.serviceprovider.repository.ActressRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -18,23 +21,32 @@ import static org.mockito.Mockito.when;
 public class CreateServiceTest {
 
     @Mock
-    private ActressRepository repository;
+    private ActressRepository repositoryMock;
+
+    @Mock
+    private ModelMapper modelMapperMock;
+
+    @Autowired
+    private ModelMapper modelMapper;
 
     @Test
     public void testCreate() {
 
-        Actress actressDummy = new Actress();
-        actressDummy.setName("Something");
-        actressDummy.setSlug("something");
-        actressDummy.setUuid("cc6ce752-59b1-4eaf-94c9-90d020c7ade6");
+        ActressDto actressDtoDummy = new ActressDto();
+        actressDtoDummy.setName("Something");
+        actressDtoDummy.setSlug("something");
+        actressDtoDummy.setUuid("cc6ce752-59b1-4eaf-94c9-90d020c7ade6");
 
-        when(this.repository.save(actressDummy)).thenReturn(actressDummy);
-        when(this.repository.findBySlug(actressDummy.getSlug())).thenReturn(null);
+        Actress actress = this.modelMapper.map(actressDtoDummy, Actress.class);
 
-        CreateService service = new CreateService(this.repository);
+        when(this.repositoryMock.save(actress)).thenReturn(actress);
+        when(this.repositoryMock.findBySlug(actressDtoDummy.getSlug())).thenReturn(null);
+        when(this.modelMapperMock.map(actressDtoDummy, Actress.class)).thenReturn(actress);
+
+        CreateActressService service = new CreateActressService(this.repositoryMock, this.modelMapperMock);
 
         try {
-            service.create(actressDummy);
+            service.create(actressDtoDummy);
         } catch (DomainValidationException | DomainAlreadyExistsException exception) {
             fail(exception.getMessage());
         }
