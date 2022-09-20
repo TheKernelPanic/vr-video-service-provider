@@ -67,6 +67,14 @@ public class VrVideo {
     )
     private Set<Actress> actresses;
 
+    @ManyToMany
+    @JoinTable(
+            name = "vr_video_category",
+            joinColumns = @JoinColumn(name = "vr_video_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id")
+    )
+    private Set<Category> categories;
+
     /**
      * TODO: Cascade type
      */

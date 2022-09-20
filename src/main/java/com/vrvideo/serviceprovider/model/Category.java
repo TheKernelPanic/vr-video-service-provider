@@ -8,6 +8,7 @@ import org.hibernate.search.annotations.Field;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -33,4 +34,7 @@ public class Category {
 
     @CreationTimestamp
     private Date createdAt;
+
+    @ManyToMany(mappedBy = "categories")
+    private Set<VrVideo> vrVideos;
 }

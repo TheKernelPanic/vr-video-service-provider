@@ -36,6 +36,9 @@ public class VrVideoDto {
     @JsonProperty("actresses")
     private Set<ActressDto> actresses;
 
+    @JsonProperty("categories")
+    private Set<CategoryDto> categories;
+
     @JsonProperty("hosted_on")
     private CdnHostDto hostedOn;
 
