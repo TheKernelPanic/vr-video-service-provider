@@ -15,7 +15,7 @@ public final class FinderActressService extends ActressService{
 
     @Autowired
     public FinderActressService(ActressRepository repository, ModelMapper modelMapper) {
-        this.repository = repository;
+        this.actressRepository = repository;
         this.modelMapper = modelMapper;
     }
 
@@ -23,14 +23,14 @@ public final class FinderActressService extends ActressService{
 
         List<ActressDto> actressDtoList = new ArrayList<>();
 
-        this.repository.findAll().forEach(actress -> actressDtoList.add(this.modelMapper.map(actress, ActressDto.class)));
+        this.actressRepository.findAll().forEach(actress -> actressDtoList.add(this.modelMapper.map(actress, ActressDto.class)));
 
         return actressDtoList;
     }
 
     public ActressDto findOneBySlug(String slug) throws DomainRecordNotFoundException {
 
-        Actress actress = this.repository.findBySlug(slug);
+        Actress actress = this.actressRepository.findBySlug(slug);
 
         if (actress == null) {
             throw new DomainRecordNotFoundException("Actress requested by slug not found");

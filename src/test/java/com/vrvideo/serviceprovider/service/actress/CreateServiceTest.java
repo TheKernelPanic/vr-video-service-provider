@@ -5,6 +5,8 @@ import com.vrvideo.serviceprovider.model.exception.DomainAlreadyExistsException;
 import com.vrvideo.serviceprovider.model.exception.DomainValidationException;
 import com.vrvideo.serviceprovider.model.Actress;
 import com.vrvideo.serviceprovider.repository.ActressRepository;
+import com.vrvideo.serviceprovider.repository.ImageActressRepository;
+import com.vrvideo.serviceprovider.repository.ImageRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -21,7 +23,13 @@ import static org.mockito.Mockito.when;
 public class CreateServiceTest {
 
     @Mock
-    private ActressRepository repositoryMock;
+    private ActressRepository actressRepositoryMock;
+
+    @Mock
+    private ImageActressRepository imageActressRepository;
+
+    @Mock
+    private ImageRepository imageRepository;
 
     @Mock
     private ModelMapper modelMapperMock;
@@ -39,11 +47,16 @@ public class CreateServiceTest {
 
         Actress actress = this.modelMapper.map(actressDtoDummy, Actress.class);
 
-        when(this.repositoryMock.save(actress)).thenReturn(actress);
-        when(this.repositoryMock.findBySlug(actressDtoDummy.getSlug())).thenReturn(null);
+        when(this.actressRepositoryMock.save(actress)).thenReturn(actress);
+        when(this.actressRepositoryMock.findBySlug(actressDtoDummy.getSlug())).thenReturn(null);
         when(this.modelMapperMock.map(actressDtoDummy, Actress.class)).thenReturn(actress);
 
-        CreateActressService service = new CreateActressService(this.repositoryMock, this.modelMapperMock);
+        CreateActressService service = new CreateActressService(
+                this.actressRepositoryMock,
+                this.imageActressRepository,
+                this.imageRepository,
+                this.modelMapperMock
+        );
 
         try {
             service.create(actressDtoDummy);
