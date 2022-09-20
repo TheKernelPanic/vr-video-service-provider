@@ -3,6 +3,8 @@ package com.vrvideo.serviceprovider.model;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.search.annotations.Field;
 
 import javax.persistence.*;
@@ -47,8 +49,11 @@ public class VrVideo {
     @Field
     private int viewedTimes;
 
-    @Field
+    @CreationTimestamp
     private Date createdAt;
+
+    @UpdateTimestamp
+    private Date updatedAt;
 
     @Field
     private Boolean favourite;

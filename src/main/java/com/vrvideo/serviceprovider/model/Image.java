@@ -9,43 +9,32 @@ import org.hibernate.search.annotations.Field;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.Set;
 
 @Entity
-@Setter
 @Getter
+@Setter
 @NoArgsConstructor
 @Table(
-    name = "actress",
-    uniqueConstraints = {
-         @UniqueConstraint(columnNames = "uuid"),
-         @UniqueConstraint(columnNames = "slug")
-    }
+        name = "image",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = "filename")
+        }
 )
-public class Actress {
+public class Image {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private int id;
 
     @Field
-    private String name;
+    private String directory;
 
     @Field
-    private String uuid;
-
-    @Field
-    private String slug;
+    private String filename;
 
     @CreationTimestamp
     private Date createdAt;
 
     @UpdateTimestamp
     private Date updatedAt;
-
-    @ManyToMany(mappedBy = "actresses")
-    private Set<VrVideo> videos;
-
-    @OneToMany(mappedBy = "actress")
-    private Set<ImageActress> imagesActress;
 }

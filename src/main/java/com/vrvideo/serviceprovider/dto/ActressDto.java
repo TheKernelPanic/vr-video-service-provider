@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -20,6 +21,9 @@ public class ActressDto {
 
     @JsonProperty("uuid")
     private String uuid;
+
+    @JsonProperty("images_actress")
+    private Set<ImageActressDto> imagesActress;
 
     @JsonProperty("created_at")
     private Date createdAt;
