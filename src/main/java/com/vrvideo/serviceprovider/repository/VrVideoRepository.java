@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface VrVideoRepository extends CrudRepository<VrVideo, Long> {
+
+    VrVideo findByUuid(String uuid);
 }
