@@ -46,6 +46,9 @@ public class VrVideoDto {
     @JsonProperty("backup_on")
     private HardDriveDto backupOn;
 
+    @JsonProperty("images_vr_video")
+    private Set<ImageVrVideoDto> imagesVrVideo;
+
     @JsonProperty("created_at")
     private Date createdAt;
 }

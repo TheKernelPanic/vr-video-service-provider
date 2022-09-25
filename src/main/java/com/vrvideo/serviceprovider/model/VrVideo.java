@@ -88,4 +88,7 @@ public class VrVideo {
 
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private CdnHost hostedOn;
+
+    @OneToMany(mappedBy = "vrVideo")
+    private Set<ImageVrVideo> imagesVrVideo;
 }
