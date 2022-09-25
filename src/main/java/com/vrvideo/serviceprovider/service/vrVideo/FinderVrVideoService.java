@@ -21,7 +21,7 @@ public final class FinderVrVideoService extends VrVideoService {
 
     public List<VrVideoDto> findAll() {
 
-        Iterable<VrVideo> vrVideos = this.repository.findAll();
+        Iterable<VrVideo> vrVideos = this.repository.findAllByOrderByCreatedAtDesc();
         List<VrVideoDto> vrVideoDtoList = new ArrayList<>();
 
         vrVideos.forEach(vrVideo -> vrVideoDtoList.add(this.modelMapper.map(vrVideo, VrVideoDto.class)));

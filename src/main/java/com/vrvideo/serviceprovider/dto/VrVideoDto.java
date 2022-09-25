@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
 import java.util.Set;
 
 @Getter
@@ -44,4 +45,7 @@ public class VrVideoDto {
 
     @JsonProperty("backup_on")
     private HardDriveDto backupOn;
+
+    @JsonProperty("created_at")
+    private Date createdAt;
 }
