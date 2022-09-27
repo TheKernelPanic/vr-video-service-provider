@@ -25,6 +25,12 @@ public class VrVideoDto {
     @JsonProperty("description")
     private String description;
 
+    @JsonProperty("duration_seconds")
+    private int durationSeconds;
+
+    @JsonProperty("rating")
+    private int rating;
+
     @JsonProperty("filesize")
     private long filesize;
 
@@ -46,7 +52,7 @@ public class VrVideoDto {
     @JsonProperty("backup_on")
     private HardDriveDto backupOn;
 
-    @JsonProperty("images_vr_video")
+    @JsonProperty("images")
     private Set<ImageVrVideoDto> imagesVrVideo;
 
     @JsonProperty("created_at")

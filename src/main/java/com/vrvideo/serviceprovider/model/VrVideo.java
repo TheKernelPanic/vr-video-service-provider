@@ -47,6 +47,9 @@ public class VrVideo {
     private Float durationSeconds;
 
     @Field
+    private int rating;
+
+    @Field
     private int viewedTimes;
 
     @CreationTimestamp

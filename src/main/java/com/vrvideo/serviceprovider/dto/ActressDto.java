@@ -22,7 +22,7 @@ public class ActressDto {
     @JsonProperty("uuid")
     private String uuid;
 
-    @JsonProperty("images_actress")
+    @JsonProperty("images")
     private Set<ImageActressDto> imagesActress;
 
     @JsonProperty("created_at")
