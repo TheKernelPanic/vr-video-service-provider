@@ -15,13 +15,13 @@ public final class FinderVrVideoService extends VrVideoService {
 
     @Autowired
     public FinderVrVideoService(VrVideoRepository repository, ModelMapper modelMapper) {
-        this.repository = repository;
+        this.vrVideoRepository = repository;
         this.modelMapper = modelMapper;
     }
 
     public List<VrVideoDto> findAll() {
 
-        Iterable<VrVideo> vrVideos = this.repository.findAllByOrderByCreatedAtDesc();
+        Iterable<VrVideo> vrVideos = this.vrVideoRepository.findAllByOrderByCreatedAtDesc();
         List<VrVideoDto> vrVideoDtoList = new ArrayList<>();
 
         vrVideos.forEach(vrVideo -> vrVideoDtoList.add(this.modelMapper.map(vrVideo, VrVideoDto.class)));

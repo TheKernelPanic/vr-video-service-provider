@@ -12,9 +12,6 @@ import java.util.Set;
 
 @Service
 public class AdderActressToVrVideoService extends VrVideoService {
-
-    private final VrVideoRepository vrVideoRepository;
-
     private final ActressRepository actressRepository;
 
     @Autowired

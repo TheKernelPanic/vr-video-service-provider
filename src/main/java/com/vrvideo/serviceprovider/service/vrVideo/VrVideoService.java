@@ -5,7 +5,7 @@ import org.modelmapper.ModelMapper;
 
 public abstract class VrVideoService {
 
-    protected VrVideoRepository repository;
+    protected VrVideoRepository vrVideoRepository;
 
     protected ModelMapper modelMapper;
 }

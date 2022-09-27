@@ -3,6 +3,7 @@ package com.vrvideo.serviceprovider.controller;
 import com.vrvideo.serviceprovider.dto.VrVideoDto;
 import com.vrvideo.serviceprovider.model.exception.DomainRecordNotFoundException;
 import com.vrvideo.serviceprovider.service.vrVideo.AdderActressToVrVideoService;
+import com.vrvideo.serviceprovider.service.vrVideo.AdderCategoryToVrVideoService;
 import com.vrvideo.serviceprovider.service.vrVideo.FinderVrVideoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,13 +22,17 @@ public class VrVideoController extends BaseController {
 
     private final AdderActressToVrVideoService adderActressToVrVideoService;
 
+    private final AdderCategoryToVrVideoService adderCategoryToVrVideoService;
+
     @Autowired
     public VrVideoController(
             FinderVrVideoService finderVrVideoService,
-            AdderActressToVrVideoService adderActressToVrVideoService
+            AdderActressToVrVideoService adderActressToVrVideoService,
+            AdderCategoryToVrVideoService adderCategoryToVrVideoService
     ) {
         this.finderVrVideoService = finderVrVideoService;
         this.adderActressToVrVideoService = adderActressToVrVideoService;
+        this.adderCategoryToVrVideoService = adderCategoryToVrVideoService;
     }
 
     @ResponseStatus(HttpStatus.OK)
@@ -43,6 +48,17 @@ public class VrVideoController extends BaseController {
 
         try {
             this.adderActressToVrVideoService.add(uuid, actressSlug);
+        } catch (DomainRecordNotFoundException exception) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @RequestMapping(value = "/add-category/{uuid}/{categorySlug}", method = RequestMethod.PUT)
+    public void addCategory(@PathVariable String uuid, @PathVariable String categorySlug) {
+
+        try {
+            this.adderCategoryToVrVideoService.add(uuid, categorySlug);
         } catch (DomainRecordNotFoundException exception) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
