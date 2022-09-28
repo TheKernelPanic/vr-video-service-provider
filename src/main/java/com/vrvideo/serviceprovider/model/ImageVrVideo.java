@@ -13,8 +13,7 @@ import javax.persistence.*;
 @Table(
         name = "image_vr_video",
         uniqueConstraints = {
-                @UniqueConstraint(columnNames = "image_id"),
-                @UniqueConstraint(columnNames = "vr_video_id")
+                @UniqueConstraint(columnNames = {"image_id", "vr_video_id"})
         }
 )
 public class ImageVrVideo {
