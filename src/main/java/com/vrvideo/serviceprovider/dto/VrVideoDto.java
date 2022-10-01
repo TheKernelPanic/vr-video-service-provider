@@ -46,6 +46,9 @@ public class VrVideoDto {
     @JsonProperty("categories")
     private Set<CategoryDto> categories;
 
+    @JsonProperty("reported")
+    private boolean reported;
+
     @JsonProperty("hosted_on")
     private CdnHostDto hostedOn;
 

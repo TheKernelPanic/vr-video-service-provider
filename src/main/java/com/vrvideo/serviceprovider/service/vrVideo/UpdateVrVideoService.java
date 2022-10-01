@@ -15,7 +15,7 @@ public class UpdateVrVideoService extends VrVideoService {
         this.vrVideoRepository = vrVideoRepository;
     }
 
-    public void toggleFavourite(String uuid) throws DomainRecordNotFoundException {
+    public void setFavourite(String uuid) throws DomainRecordNotFoundException {
         VrVideo vrVideo = this.vrVideoRepository.findByUuid(uuid);
         if (vrVideo == null) {
             throw new DomainRecordNotFoundException(String.format("Vr video not exists with uuid %s", uuid));
@@ -35,6 +35,28 @@ public class UpdateVrVideoService extends VrVideoService {
             throw new DomainRecordNotFoundException(String.format("Vr video not exists with uuid %s", uuid));
         }
         vrVideo.setRating(value);
+
+        this.vrVideoRepository.save(vrVideo);
+    }
+
+    public void setReported(String uuid) throws DomainRecordNotFoundException{
+
+        VrVideo vrVideo = this.vrVideoRepository.findByUuid(uuid);
+        if (vrVideo == null) {
+            throw new DomainRecordNotFoundException(String.format("Vr video not exists with uuid %s", uuid));
+        }
+        vrVideo.setReported(!vrVideo.getReported());
+
+        this.vrVideoRepository.save(vrVideo);
+    }
+
+    public void addView(String uuid) throws DomainRecordNotFoundException {
+
+        VrVideo vrVideo = this.vrVideoRepository.findByUuid(uuid);
+        if (vrVideo == null) {
+            throw new DomainRecordNotFoundException(String.format("Vr video not exists with uuid %s", uuid));
+        }
+        vrVideo.setViewedTimes(vrVideo.getViewedTimes() + 1);
 
         this.vrVideoRepository.save(vrVideo);
     }

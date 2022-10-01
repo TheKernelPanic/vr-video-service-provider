@@ -72,11 +72,11 @@ public class VrVideoController extends BaseController {
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @RequestMapping(value = "/toggle-favourite/{uuid}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/favourite/{uuid}", method = RequestMethod.PUT)
     public void toggleFavourite(@PathVariable String uuid) {
 
         try {
-            this.updateVrVideoService.toggleFavourite(uuid);
+            this.updateVrVideoService.setFavourite(uuid);
         } catch (DomainRecordNotFoundException exception) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
@@ -92,6 +92,28 @@ public class VrVideoController extends BaseController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         } catch (DomainValidationException exception) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @RequestMapping(value = "/view/{uuid}", method = RequestMethod.PUT)
+    public void addView(@PathVariable String uuid) {
+
+        try {
+            this.updateVrVideoService.addView(uuid);
+        } catch (DomainRecordNotFoundException exception) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @RequestMapping(value = "/reported/{uuid}", method = RequestMethod.PUT)
+    public void reported(@PathVariable String uuid) {
+
+        try {
+            this.updateVrVideoService.setReported(uuid);
+        } catch (DomainRecordNotFoundException exception) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
     }
 }
