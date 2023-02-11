@@ -49,6 +49,9 @@ public class VrVideoDto {
     @JsonProperty("reported")
     private boolean reported;
 
+    @JsonProperty("original_filename")
+    private String originalFilename;
+
     @JsonProperty("hosted_on")
     private CdnHostDto hostedOn;
 
