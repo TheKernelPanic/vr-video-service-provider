@@ -2,13 +2,17 @@
 
 ___
 
-### Docker environment
+### Description
+
+Application server developed with spring boot.
+
+### Docker environment (DB)
 
 ```bash 
 docker-compose -p vr_videos_service_provider up -d 
 ```
 
-### Build __jar__ (Windows)
+### Build application via docker
 ```bash
 docker run -it --rm -v "%cd%":/usr/src/workdir -v "%cd%/target:/usr/src/workdir/target" -w /usr/src/workdir maven mvn package -Dmaven.test.skip
 ```

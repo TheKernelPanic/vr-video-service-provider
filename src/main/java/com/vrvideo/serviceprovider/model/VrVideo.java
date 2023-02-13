@@ -67,6 +67,9 @@ public class VrVideo {
     @Field
     private int height;
 
+    @Field
+    private String format;
+
     @ManyToMany
     @JoinTable(
             name = "vr_video_actress",

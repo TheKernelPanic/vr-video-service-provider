@@ -55,6 +55,9 @@ public class VrVideoDto {
     @JsonProperty("hosted_on")
     private CdnHostDto hostedOn;
 
+    @JsonProperty("format")
+    private String format;
+
     @JsonProperty("backup_on")
     private HardDriveDto backupOn;
 
